@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../assets/CSS/style.css">
+
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: goldenrod;
+        }
+        .container {
+            display: flex;
+            gap: 40px;
+            padding: 20px;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .left {
+            max-width: 450px;
+        }
+        .right img {
+            width: 190px;
+            border-radius: 8px;
+            height: 250px;
+            margin-top: 30px;
+        }
+        .right {
+            flex: column;
+        }
+        p {
+            text-align: justify;
+        }
+        h3 {
+            margin-left: 13px;
+        }
+        span {
+            margin-left: 17px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    {{!-- NAVBAR --}}
+    {{>navbar}}
+
+    <div class="container">
+
+        <div class="left">
+            
+            <h2>Welcome to My Hut</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere nihil possimus aliquid expedita quidem architecto deserunt quis numquam, in alias. Rerum, magni. Illum quis laboriosam nemo delectus nihil, non magnam. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab facilis quasi tempora, vero pariatur dolorum at, iure, corrupti porro consequatur voluptatibus dicta quod beatae ut dolore! Delectus facere rerum maiores!</p>
+            <a href="./contact" class="button">Contact</a>
+            <h4>download CV<i class="fa-solid fa-download fa-xl" style="color: rgb(242, 204, 0);"></i></h4>
+
+            <div class="social">
+                <i class="fa-brands fa-instagram fa-2xl" style="color: rgb(242, 204, 0);"></i>
+                <i class="fa-brands fa-linkedin fa-2xl" style="color: rgb(242, 204, 0);"></i>
+                <i class="fa-brands fa-github fa-2xl" style="color: rgb(242, 204, 0);"></i>
+                <i class="fa-brands fa-twitter fa-2xl" style="color: rgb(242, 204, 0);"></i>
+            </div>
+        </div>
+
+        <div class="right">
+            <img src="/assets/images/goldpic.png" alt="myImage">
+            <h3>Rifki Bilal Hariri</h3>
+            <span>Fullstack Developer</span>
+        </div>
+
+    </div>
+    <script src="script/index.js"></script>
+
+</body>
+</html>

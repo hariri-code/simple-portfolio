@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Project</title>
+    <link rel="stylesheet" href="./assets/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: goldenrod;
+        }
+        .project-detail {
+            display: flex;
+            gap: 40px;
+            padding: 20px;
+        }
+        .left img {
+            width: 500px;
+            border-radius: 8px;
+        }
+        .right {
+            max-width: 270px;
+        }
+        .right h3 {
+            margin-top: 20px;
+        }
+        .tech {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin margin-top: 10px;
+        }
+        .tech span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    {{>navbar}}
+
+    <h1>Dumbways Web App</h1>
+
+    <div class="project-detail">
+
+        <div class="left">
+            <img src="/assets/images/imghp.jpg" alt="projectImage">
+        </div>
+        <div class="right">
+            <h3>Duration</h3>
+            <p><i class="fa-solid fa-calendar-days" style="color: rgb(242, 204, 0);"></i>31 Mar 2026 - 1 Apr 2026</p>
+            <p><i class="fa-solid fa-clock" style="color: rgb(242, 204, 0);"></i>1 day</p>
+
+            <h3>Technologies</h3>
+            <div class="tech">
+                <span><i class="fa-brands fa-react" style="color: rgb(242, 204, 0);"></i>React JS</span>
+                <span><i class="fa-brands fa-js" style="color: rgb(242, 204, 0);"></i>JavaScript</span>
+                <span><i class="fa-brands fa-node-js" style="color: rgb(242, 204, 0);"></i>Node JS</span>
+                <span><i class="fa-brands fa-css" style="color: rgb(242, 204, 0);"></i>CSS</span>
+            </div>
+        </div>
+
+    </div>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nemo ipsa amet cum, aspernatur sit delectus, laboriosam excepturi consequatur voluptate adipisci quidem consectetur officiis assumenda, alias impedit cupiditate a accusantium. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam fugit sint enim obcaecati molestiae illum eveniet nobis? Iure sed eius fugit! Quae consectetur nemo quia provident recusandae vero impedit ipsam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia quae molestias nam itaque necessitatibus beatae vitae tempore nisi? Suscipit dolores aliquam repellat voluptas numquam natus quod doloribus velit expedita cum.</p>
+  <script src="script/index.js"></script>
+
+</body>
+</html>
