@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <link rel="stylesheet" href="./assets/CSS/style.css">
+  <style>
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+    
+  {{>navbar}}
+
+  <h2>ADD MY PROJECT</h2>
+  <div class="project-container">
+    
+    <form action="/project/edit/{{project.id}}" method="POST" id="projectForm">
+      <input type="text" name="title" id="projectName" placeholder="Project Name"
+      value="{{project.title}}" required>
+        
+
+      <textarea name="description" id="description" placeholder="Description" required>{{project.description}}</textarea>
+
+
+      <button type="submit" class="button">Submit</button>
+    </form>
+  </div>
+
+</body>
+</html>

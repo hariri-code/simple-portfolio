@@ -43,7 +43,7 @@ function renderProjects() {
         `;
         
     }).join('');
-    container.innerHTML = projectsHTML
+   // container.innerHTML = projectsHTML //
 }
 function saveToLocalStorage() {
     localStorage.setItem('projects', JSON.stringify(projects));
@@ -63,13 +63,13 @@ function deleteProject(id) {
 }
 
 
-renderProjects();
+// renderProjects(); //
 
 
 const form = document.getElementById('projectForm')
 
 form.addEventListener('submit', function(event){
-    event.preventDefault(); // hentikan reload halaman
+   // event.preventDefault(); // hentikan reload halaman
 
     const name = document.getElementById('projectName').value;
     const description = document.getElementById('description').value;
@@ -81,8 +81,8 @@ form.addEventListener('submit', function(event){
         isNew: true
     };
 
-    projects.push(newProject);
-    saveToLocalStorage();
-    renderProjects();
+    // projects.push(newProject); //
+    // saveToLocalStorage(); //
+    // renderProjects(); //
 
 })

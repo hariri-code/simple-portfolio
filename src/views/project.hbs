@@ -17,18 +17,44 @@
   <h2>ADD MY PROJECT</h2>
   <div class="project-container">
     
-    <form id="projectForm">
-      <input type="text" id="projectName" placeholder="Project Name" required>
-      <textarea id="description" placeholder="Description" required></textarea>
+    <form action="/project" method="POST" id="projectForm">
+      <input type="text" name="title" id="projectName" placeholder="Project Name" required>
+      <textarea name="description" id="description" placeholder="Description" required></textarea>
 
 
-    <button type="submit" class="button">Submit</button>
+      <button type="submit" class="button">Submit</button>
     </form>
   </div>
 
-    <h1 class="title">MY PROJECT</h1>
+      <h1 class="title">MY PROJECT ({{projects.length}})</h1>
     <div class="project-list" id="projectList">
         
+    
+      {{#if projects}}
+      {{#each projects}}
+      <div>
+        <h2>{{ title }}</h2>
+        <p>{{ description }}</p>
+
+        <a href="/project/{{this.id}}" class="btn-detail">
+        View Details
+        </a>
+        <div class="detail-actions">
+          <a href="/project/edit/{{this.id}}" class="btn-edit">Edit</a>
+          <form action="/project/delete/{{this.id}}" method="POST">
+          <button type="submit" class="btn" 
+            onclick= "return confirm('Are you sure?')">Delete
+          </button>
+          </form>
+        
+        
+      </div>
+    
+      {{/each}}
+
+      {{else}}
+      <p>No project found</p>
+      {{/if}}
     </div>
 
   <script src="/assets/scripts/script.js"></script>
