@@ -157,7 +157,7 @@ app.post('/project/edit/:id', async (req, res) => {
 
     console.log('Project updated:', projects[index]);
 
-    res.redirect(`/project/${projectId}`);
+    res.redirect(`/project/${projectIdParam}`);
 
 } catch (error) {
 console.error(error);

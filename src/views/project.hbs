@@ -27,9 +27,8 @@
   </div>
 
       <h1 class="title">MY PROJECT ({{projects.length}})</h1>
-    <div class="project-list" id="projectList">
+    <div class="project-list">
         
-    
       {{#if projects}}
       {{#each projects}}
       <div>
@@ -46,8 +45,7 @@
             onclick= "return confirm('Are you sure?')">Delete
           </button>
           </form>
-        
-        
+        </div>
       </div>
     
       {{/each}}
