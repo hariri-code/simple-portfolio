@@ -83,3 +83,8 @@ body {
   object-fit: cover;
   border-radius: 10px;
 }
+.alert {
+    text-align: center;
+    color: green;
+    background-color: rgb(221, 247, 214);
+}

@@ -1,16 +1,42 @@
-const express = require('express')
-const hbs = require('hbs');
+import express from 'express'
+import { engine } from 'express-handlebars';
+import { db } from "./config/database.js";
+import session from 'express-session';
+
+import { 
+  getProjects, 
+  getProjectById, 
+  createProject,
+  getEditProject,
+  updateProject,
+  deleteProject
+} from './src/assets/scripts/project.js';
+
+
 const app = express()
 const port = 3000
 
+app.engine('hbs', engine({
+  extname: '.hbs',
+  defaultLayout: 'main',
+  layoutsDir: './src/views/layouts',
+  partialsDir: './src/views/partials'
+}));
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+app.use(session({
+  secret: 'secretkey',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 
 app.set('view engine', 'hbs');
 app.set('views', './src/views')
 
-hbs.registerPartials("./src/views/partials")
+// hbs.registerPartials("./src/views/partials")
 
 // middleware
 app.use('/assets', express.static('./src/assets'))
@@ -55,6 +81,15 @@ app.get('/detail-project', (req, res) => {
 let projects = [] // Array untuk simpan data
 let projectId = 1 // counter untuk Id
 
+//     IMPLEMENTASI CRUD DATABASE      //
+
+app.get('/project', async (req, res) => getProjects(req, res, db))
+app.get('/project/:id', async (req, res) => getProjectById(req, res, db))
+app.post('/project', (req, res) => createProject(req, res, db))
+app.get('/project/edit/:id', (req, res) => getEditProject(req, res, db))
+app.post('/project/edit/:id', (req, res) => updateProject(req, res, db))
+app.post('/project/delete/:id', (req, res) => deleteProject(req, res, db))
+
 // function getProjects() {
 //  return new Promise((resolve, reject) => {
 //      setTimeout(() => {
@@ -63,132 +98,131 @@ let projectId = 1 // counter untuk Id
 //  });
 // }
 
-app.get('/project', async (req, res) => {
-  try {
-    res.render('project', {
-      projects: projects
-    });
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Error loading projects');
-  }
-});
+// app.get('/project', async (req, res) => {
+//  try {
+//    res.render('project', {
+//      projects: projects
+//    });
+//  } catch (error) {
+//    console.error('Error:', error);
+//    res.status(500).send('Error loading projects');
+//  }
+// });
 
-app.post('/project', async (req, res) => {
-  try {
-  const { title, description } = req.body;
+// app.post('/project', async (req, res) => {
+//  try {
+//  const { title, description } = req.body;
 
-  if (!title || !description) {
-    return res.send('Title and description are required')}
+//  if (!title || !description) {
+//    return res.send('Title and description are required')}
 
-    const newProject = {
-      id: projectId++,
-      title,
-      description
-    }
-    await new Promise(resolve => setTimeout(resolve, 1000))
+//    const newProject = {
+//      id: projectId++,
+//      title,
+//      description
+//    }
+//    await new Promise(resolve => setTimeout(resolve, 1000))
     
-    projects.push(newProject)
-    console.log('New added project:', newProject);
-    console.log('All projects:', projects);
-  res.redirect('/project')
+//    projects.push(newProject)
+//    console.log('New added project:', newProject);
+//    console.log('All projects:', projects);
+//  res.redirect('/project')
 
-  } catch (error) {
-  console.error(error);
-  res.status(500).send('Error adding project');
-}
-});
+//  } catch (error) {
+//  console.error(error);
+//  res.status(500).send('Error adding project');
+// }
+// });
 
-app.get('/project/:id', async (req, res) =>{
-  try {
-    const { id } = req.params
+// app.get('/project/:id', async (req, res) =>{
+//  try {
+//    const { id } = req.params
 
-    const projectIdParam = parseInt(id)
+//    const projectIdParam = parseInt(id)
 
-    const project = projects.find(p => p.id === projectIdParam)
+//    const project = projects.find(p => p.id === projectIdParam)
 
-    if (!project) {
-      return res.send('Project not found')
-    }
-    res.render('project-detail', {project})
-  } catch (error) {
-  console.error(error);
-  res.status(500).send('Error loading project detail');
-}
-})
+//    if (!project) {
+//      return res.send('Project not found')
+//    }
+//    res.render('project-detail', {project})
+//  } catch (error) {
+//  console.error(error);
+//  res.status(500).send('Error loading project detail');
+// }
+// })
 
-app.get('/project/edit/:id', async (req, res) =>{
-  try {
-    const { id } = req.params
+// app.get('/project/edit/:id', async (req, res) =>{
+//  try {
+//    const { id } = req.params
 
-    const projectIdParam = parseInt(id)
+//    const projectIdParam = parseInt(id)
 
-    const project = projects.find(p => p.id === projectIdParam)
+//    const project = projects.find(p => p.id === projectIdParam)
 
-    if (!project) {
-      return res.send('Project not found')
-    }
-    res.render('project-edit', {project})
-  } catch (error) {
-  console.error(error);
-  res.status(500).send('Error loading project detail');
-}
-})
+//    if (!project) {
+//      return res.send('Project not found')
+//    }
+//    res.render('project-edit', {project})
+//  } catch (error) {
+//  console.error(error);
+//  res.status(500).send('Error loading project detail');
+// }
+// })
 
-app.post('/project/edit/:id', async (req, res) => {
-  try {
-    console.log('Projects:', projects);
-    const { id } = req.params;
-    const projectIdParam = parseInt(id)
+// app.post('/project/edit/:id', async (req, res) => {
+//  try {
+//    console.log('Projects:', projects);
+//    const { id } = req.params;
+//    const projectIdParam = parseInt(id)
 
-    const { title, description } = req.body;
+//    const { title, description } = req.body;
 
-    const index = projects.findIndex(p => p.id === projectIdParam);
+//    const index = projects.findIndex(p => p.id === projectIdParam);
 
-    if (index === -1) {
-    return res.send('Project not found!');
-    }
+//    if (index === -1) {
+//    return res.send('Project not found!');
+//    }
 
-    projects[index] = {
-    id: projectIdParam, 
-    title, 
-    description
-    }
+//    projects[index] = {
+//    id: projectIdParam, 
+//    title, 
+//    description
+//    }
+//  console.log('Project updated:', projects[index]);
 
-    console.log('Project updated:', projects[index]);
+//    res.redirect(`/project/${projectIdParam}`);
 
-    res.redirect(`/project/${projectIdParam}`);
+// } catch (error) {
+// console.error(error);
+// res.status(500).send('Error loading project detail');
+// }
+// });
 
-} catch (error) {
-console.error(error);
-res.status(500).send('Error loading project detail');
-}
-});
+// app.post('/project/delete/:id', async (req, res) => {
+//  try {
+//    const { id } = req.params;
+//    const projectIdParam = parseInt(id)
 
-app.post('/project/delete/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const projectIdParam = parseInt(id)
+//    const project = projects.find(p => p.id === projectIdParam);
 
-    const project = projects.find(p => p.id === projectIdParam);
+//    if (!project) {
+//    return res.status(404).send('Project not found!');
+//    }
 
-    if (!project) {
-    return res.status(404).send('Project not found!');
-    }
+//    projects = projects.filter(p => p.id !== projectIdParam);
 
-    projects = projects.filter(p => p.id !== projectIdParam);
-
-    console.log(`Project deleted: ${project.projectName} (ID: ${projectIdParam})`);
-    console.log('Remaining projects:', projects);
+//    console.log(`Project deleted: ${project.projectName} (ID: ${projectIdParam})`);
+//    console.log('Remaining projects:', projects);
 
 
-    res.redirect('/project');
+//    res.redirect('/project');
 
-} catch (error) {
-console.error(error);
-res.status(500).send('Error deleting project');
-}
-});
+// } catch (error) {
+// console.error(error);
+// res.status(500).send('Error deleting project');
+// }
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
